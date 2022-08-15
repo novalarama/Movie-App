@@ -2,23 +2,24 @@ name: movie
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=2.16.2 <3.0.0'
 
-dependencies: 
-  velocity_x: "3.4.0"
+dependencies:
   cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
   get: 4.6.5
   google_fonts: ^3.0.1
-  flutter: 
-    sdk: flutter
+  intl: ^0.17.0
+  velocity_x: 3.4.0
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^1.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
   assets:
     - assets/models/genre.json
@@ -29,4 +30,3 @@ flutter:
         - asset: assets/fonts/Poppins/Poppins-Medium.ttf
         - asset: assets/fonts/Poppins/Poppins-Regular.ttf
         - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-

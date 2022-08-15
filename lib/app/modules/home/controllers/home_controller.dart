@@ -26,6 +26,8 @@ class HomeController extends GetxController with StateMixin {
     fetchUpcomingFilm();
   }
 
+  // listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
+
   // fetch data now playing film
   void fetchNowPlayingFilm() {
     dataFilmProvider.getNowPlaying().then((result) {
@@ -39,6 +41,10 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
+      });
+
+      listNowPlaying.forEach((element) {
+        element.genreIds!.removeWhere((val) => val.runtimeType == int);
       });
 
       change(null, status: RxStatus.success());
@@ -60,7 +66,12 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
-      }); // change type string to object
+      }); 
+
+      listPopular.forEach((element) {
+        element.genreIds!.removeWhere((val) => val.runtimeType == int);
+      });
+
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
@@ -80,7 +91,12 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
-      }); // change type string to object
+      }); 
+
+      listTopRated.forEach((element) {
+        element.genreIds!.removeWhere((val) => val.runtimeType == int);
+      });
+
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
@@ -100,7 +116,12 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
-      }); // change type string to object
+      });
+
+      listUpcoming.forEach((element) {
+        element.genreIds!.removeWhere((val) => val.runtimeType == int);
+      });
+
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));

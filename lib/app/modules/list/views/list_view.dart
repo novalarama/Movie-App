@@ -11,6 +11,11 @@ class ListView extends GetView<ListController> {
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> receivedArgument = Get.arguments;
+
+    late Map<String, dynamic> title = receivedArgument[0];
+    late RxList<dynamic> listFilm = receivedArgument[1];
+
     return Scaffold(
       backgroundColor: mainColor,
       appBar: AppBar(
@@ -18,8 +23,7 @@ class ListView extends GetView<ListController> {
         title: '${title['title']}'.text.bold.start.make(),
         centerTitle: true,
       ),
-      body: 
-      ),
-    );
+       body: 
+      );
   }
 }
