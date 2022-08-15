@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/category/bindings/category_binding.dart';
+import '../modules/category/views/category_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/list/bindings/list_binding.dart';
-import '../modules/list/views/list_view.dart';
 
 part 'app_routes.dart';
 
@@ -26,9 +26,9 @@ class AppPages {
       binding: DetailBinding(),
     ),
     GetPage(
-      name: _Paths.LIST,
-      page: () => ListView(),
-      binding: ListBinding(),
+      name: _Paths.CATEGORY,
+      page: () => CategoryView(),
+      binding: CategoryBinding(),
     ),
   ];
 }

@@ -24,7 +24,7 @@ class Part extends StatelessWidget {
             '$title'.text.color(textColor).bold.size(18).make().pLTRB(20, 15, 220, 8),
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.LIST, arguments: [
+                Get.toNamed(Routes.CATEGORY, arguments: [
                   {'title': title},
                   listFilm,
                 ]);
@@ -37,7 +37,7 @@ class Part extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            itemCount: listFilm.isNotEmpty ? listFilm.length-10 : 0,
+            itemCount: listFilm.isNotEmpty ? listFilm.length-(listFilm.length~/2) : 0,
             itemBuilder: (context, index) {
               List listGenre = listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
               return InkWell(

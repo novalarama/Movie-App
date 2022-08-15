@@ -24,7 +24,7 @@ class Swiper extends StatelessWidget {
             'Now Playing'.text.color(textColor).bold.size(18).make().pLTRB(20, 15, 180, 8),
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.LIST, arguments: [
+                Get.toNamed(Routes.CATEGORY, arguments: [
                   {'title': title},
                   listFilm,
                 ]);
