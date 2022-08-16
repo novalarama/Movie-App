@@ -8,7 +8,10 @@ import 'package:velocity_x/velocity_x.dart';
 class DetailView extends GetView<DetailController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if (controller.listFilm == null) {
+      return CircularProgressIndicator();
+    } else {
+      return Scaffold(
       backgroundColor: mainColor,
           appBar: AppBar(
             backgroundColor: secondColor.withOpacity(0.01),
@@ -68,5 +71,6 @@ class DetailView extends GetView<DetailController> {
         ]),
       )
     );
+    }
   }
 }
