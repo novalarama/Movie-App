@@ -29,8 +29,8 @@ class HomeController extends GetxController with StateMixin {
   // listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
 
   // fetch data now playing film
-  void fetchNowPlayingFilm() {
-    dataFilmProvider.getNowPlaying().then((result) {
+  void fetchNowPlayingFilm ()async {
+     await dataFilmProvider.getNowPlaying().then((result) {
       listNowPlaying.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
       listGenre.forEach((data) {
@@ -54,8 +54,8 @@ class HomeController extends GetxController with StateMixin {
   }
 
   // fetch data popular film
-  void fetchPopularFilm() {
-    dataFilmProvider.getPopular().then((result) {
+  void fetchPopularFilm() async {
+    await dataFilmProvider.getPopular().then((result) {
       listPopular.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
       listGenre.forEach((data) {
@@ -79,8 +79,8 @@ class HomeController extends GetxController with StateMixin {
   }
 
   // fetch data top rated film
-  void fetchTopRatedFilm() {
-    dataFilmProvider.getTopRated().then((result) {
+  void fetchTopRatedFilm() async {
+    await dataFilmProvider.getTopRated().then((result) {
       listTopRated.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
       listGenre.forEach((data) {
@@ -104,8 +104,8 @@ class HomeController extends GetxController with StateMixin {
   }
 
   // fetch data upcoming film
-  void fetchUpcomingFilm() {
-    dataFilmProvider.getUpcoming().then((result) {
+  void fetchUpcomingFilm() async {
+    await dataFilmProvider.getUpcoming().then((result) {
       listUpcoming.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
       listGenre.forEach((data) {
@@ -129,8 +129,8 @@ class HomeController extends GetxController with StateMixin {
   }
 
   // function for fetch genreIds data with genre film
-  void getDataGenre() {
-    dataFilmProvider.getGenre().then((result) {
+  void getDataGenre() async {
+    await dataFilmProvider.getGenre().then((result) {
       listGenre.value = Genre.fromJson(result.body).genres!;
       change(null, status: RxStatus.success());
     }, onError: (err) {
