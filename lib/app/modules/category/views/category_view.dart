@@ -11,7 +11,7 @@ class CategoryView extends GetView<CategoryController> {
   final RxList<Results> listFilm = Get.arguments[1];
   @override
   Widget build(BuildContext context) {
-    if (listFilm != null) {
+    if (Get.arguments != null) {
       return Scaffold(
           backgroundColor: mainColor,
           appBar: AppBar(
@@ -43,12 +43,11 @@ class CategoryView extends GetView<CategoryController> {
                           right: 15,
                           left: 20,
                         ),
-                        VStack([
-                          Expanded(
+                        Expanded(
                             child: VStack([
-                          '${film[index].title}'.text.color(textColor).ellipsis.bold.size(18).make(),
+                          '${film[index].title}'.text.color(textColor).ellipsis.overflow(TextOverflow.visible).bold.size(24).lineHeight(1).make(),
                           '${film[index].releaseDate}'.text.color(buttonTextColor).size(11).make(),
-                          film[index].genreIds!.join(", ").text.color(textColor).size(8).ellipsis.make(),
+                          film[index].genreIds!.join(", ").text.color(textColor).size(8).ellipsis.overflow(TextOverflow.ellipsis).make(),
                           HStack([
                             VxRating(
                               onRatingUpdate: (val) {},
@@ -61,10 +60,10 @@ class CategoryView extends GetView<CategoryController> {
                             " ${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
                             " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
                           ])
-                        ]).paddingOnly(top: 10)
-                        ),
-                        ])
-                      ])).height(175).color(secondColor).make(),
+                        ]).paddingOnly(top: 10)),
+                        Icon(Icons.bookmark_add_outlined, color: buttonTextColor,)
+                      ]).p4()
+                    ).height(175).color(secondColor).make(),
                     );
                   } else {
                     return CircularProgressIndicator();

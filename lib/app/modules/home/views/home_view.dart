@@ -32,7 +32,9 @@ class HomeView extends GetView<HomeController> {
                   child: Center(
                     child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).makeCentered()]),
                   ),
-                )),
+                ),
+                onError: (error) => "Error : $error".text.color(textColor).makeCentered()
+              ),
           ),
         ]).scrollVertical(),
       ),

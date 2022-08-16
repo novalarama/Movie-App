@@ -39,7 +39,6 @@ class Swiper extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   Get.toNamed(Routes.DETAIL, arguments: listFilm[index]);
-                  print(listFilm[index].genreIds);
                 },
                 child: VxContinuousRectangle(
                   radius: 16,

@@ -44,7 +44,7 @@ class Part extends StatelessWidget {
                 onTap: () {
                   Get.toNamed(
                     Routes.DETAIL,
-                    arguments: listFilm,
+                    arguments: listFilm[index],
                   );
                 },
                 child: VxContinuousRectangle(

@@ -14,7 +14,7 @@ class HomeController extends GetxController with StateMixin {
   final listUpcoming = <Results>[].obs;
 
   //prepare for genre data
-  final listGenre = <Genres>[].obs;
+  final listGenre = <AllGenres>[].obs;
 
   @override
   void onInit() {
@@ -66,7 +66,7 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
-      }); 
+      });
 
       listPopular.forEach((element) {
         element.genreIds!.removeWhere((val) => val.runtimeType == int);
@@ -91,7 +91,7 @@ class HomeController extends GetxController with StateMixin {
             }
           }
         });
-      }); 
+      });
 
       listTopRated.forEach((element) {
         element.genreIds!.removeWhere((val) => val.runtimeType == int);
@@ -137,4 +137,5 @@ class HomeController extends GetxController with StateMixin {
       change(null, status: RxStatus.error(err.toString()));
     });
   }
+  
 }
