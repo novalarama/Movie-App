@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: mainColor,
       appBar: AppBar(
-        backgroundColor: secondColor,
+        // backgroundColor: secondColor,
         title: 'Movie App'.text.bold.start.make(),
         centerTitle: true,
       ),

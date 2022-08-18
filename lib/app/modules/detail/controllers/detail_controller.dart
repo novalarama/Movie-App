@@ -10,7 +10,6 @@ class DetailController extends GetxController with StateMixin {
   final Results listFilm = Get.arguments;
 
   final runtime = 0.obs;
-  // late RxString fixRuntime = "".obs;
 
   // convert mintues to hours
   // void getTimeString(runtime) {

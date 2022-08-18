@@ -9,6 +9,7 @@ void main() {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
+      themeMode: ThemeMode.dark,
       title: "Movie App",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
