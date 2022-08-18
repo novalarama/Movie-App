@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
-import 'package:movie/app/models/FilmModel.dart';
+import 'package:movie/app/models/film_model.dart';
 import 'package:movie/app/repository/providers/data_film_provider.dart';
-import 'package:movie/app/models/RuntimeModel.dart';
+import 'package:movie/app/models/detail_film.dart';
 
 class DetailController extends GetxController with StateMixin {
   final DataFilmProvider data;
   DetailController({required this.data});
 
-  final Results listFilm = Get.arguments;
+  final int idFilm = Get.arguments;
 
-  final runtime = 0.obs;
+  final detailFilm = DetailFilm().obs;
 
   // convert mintues to hours
   // void getTimeString(runtime) {
@@ -19,9 +19,9 @@ class DetailController extends GetxController with StateMixin {
   // }
 
   // get runtime data's
-  void getDataRuntime() {
-    data.getDuration(listFilm.id).then((result) {
-      runtime.value = RuntimeModel.fromJson(result.body).runtime!;
+  void getDetailFilm() {
+    data.getDetailFilm(idFilm).then((result) {
+      detailFilm.value = DetailFilm.fromJson(result.body);
 
       change(null, status: RxStatus.success());
     }, onError: (err) {
@@ -32,7 +32,6 @@ class DetailController extends GetxController with StateMixin {
   @override
   void onInit() {
     super.onInit();
-    getDataRuntime();
-    // getTimeString(runtime);
+    getDetailFilm();
   }
 }

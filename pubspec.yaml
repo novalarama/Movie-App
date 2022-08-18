@@ -24,9 +24,15 @@ flutter:
   assets:
     - assets/models/genre.json
   fonts:
-    - family: Poppins
+    - family: Plus Jakarta Display
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
-        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
-        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+        - asset: assets/fonts/Plus-Jakarta-Display/PlusJakartaDisplay-Bold.otf
+        - asset: assets/fonts/Plus-Jakarta-Display/PlusJakartaDisplay-Medium.otf
+        - asset: assets/fonts/Plus-Jakarta-Display/PlusJakartaDisplay-Regular.otf
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+  #       - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+  #       - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+  #       - asset: assets/fonts/Poppins/Poppins-Thin.ttf

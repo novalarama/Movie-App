@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/category_controller.dart';
 import 'package:movie/app/routes/app_pages.dart';
-import 'package:movie/app/models/FilmModel.dart';
+import 'package:movie/app/models/film_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:movie/app/data/constants/assetsDesign.dart';
 
@@ -11,7 +11,7 @@ class CategoryView extends GetView<CategoryController> {
   final RxList<Results> listFilm = Get.arguments[1];
   @override
   Widget build(BuildContext context) {
-    if (Get.arguments != null) {
+    if (listFilm != null || title != null) {
       return Scaffold(
           backgroundColor: mainColor,
           appBar: AppBar(
@@ -27,13 +27,12 @@ class CategoryView extends GetView<CategoryController> {
                 itemCount: listFilm.isNotEmpty ? listFilm.length : 0,
                 itemBuilder: (context, index) {
                   var film = listFilm;
-                  if (film != null) {
                     return InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.DETAIL, arguments: film[index]);
+                        Get.toNamed(Routes.DETAIL, arguments: film[index].id);
                       },
                       child: VxBox(
-                          child: HStack([
+                          child: VxInlineBlock(children: <Widget>[
                         VxContinuousRectangle(
                           width: 100,
                           height: 150,
@@ -60,20 +59,21 @@ class CategoryView extends GetView<CategoryController> {
                             " ${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
                             " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
                           ])
-                        ]).paddingOnly(top: 10)),
-                        Icon(Icons.bookmark_add_outlined, color: buttonTextColor,)
-                      ]).p4()
-                    ).height(175).color(secondColor).make(),
+                        ])),
+                        Icon(
+                          Icons.bookmark_add_outlined,
+                          color: buttonTextColor,
+                        ).paddingOnly(right: 8)
+                      ])).height(175).color(secondColor).make(),
                     );
-                  } else {
-                    return CircularProgressIndicator();
-                  }
                 },
               )
             ]),
           ));
     } else {
-      return CircularProgressIndicator();
+      return Center(
+        child: ElevatedButton.icon(onPressed: () => Get.toNamed(Routes.HOME), icon: Icon(Icons.arrow_back), label: 'Kembali'.text.make()),
+      );
     }
   }
 }

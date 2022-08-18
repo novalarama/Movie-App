@@ -1,4 +1,4 @@
-class RuntimeModel {
+class DetailFilm {
   bool? adult;
   String? backdropPath;
   BelongsToCollection? belongsToCollection;
@@ -25,7 +25,7 @@ class RuntimeModel {
   double? voteAverage;
   int? voteCount;
 
-  RuntimeModel(
+  DetailFilm(
       {this.adult,
       this.backdropPath,
       this.belongsToCollection,
@@ -52,7 +52,7 @@ class RuntimeModel {
       this.voteAverage,
       this.voteCount});
 
-  RuntimeModel.fromJson(Map<String, dynamic> json) {
+  DetailFilm.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     belongsToCollection = json['belongs_to_collection'] != null

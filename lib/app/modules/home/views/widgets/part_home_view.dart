@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/app/routes/app_pages.dart';
-import 'package:movie/app/models/FilmModel.dart';
+import 'package:movie/app/models/film_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:movie/app/data/constants/assetsDesign.dart';
 import 'package:intl/intl.dart';
@@ -37,14 +37,14 @@ class Part extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            itemCount: listFilm.isNotEmpty ? listFilm.length-(listFilm.length~/2) : 0,
+            itemCount: listFilm.isNotEmpty ? listFilm.length - (listFilm.length ~/ 2) : 0,
             itemBuilder: (context, index) {
               List listGenre = listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
               return InkWell(
                 onTap: () {
                   Get.toNamed(
                     Routes.DETAIL,
-                    arguments: listFilm[index],
+                    arguments: listFilm[index].id,
                   );
                 },
                 child: VxContinuousRectangle(

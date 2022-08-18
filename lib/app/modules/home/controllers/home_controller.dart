@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:movie/app/models/FilmModel.dart';
+import 'package:movie/app/models/film_model.dart';
 import 'package:movie/app/repository/providers/data_film_provider.dart';
 import 'package:movie/app/models/genre_model.dart';
 
@@ -29,24 +29,11 @@ class HomeController extends GetxController with StateMixin {
   // listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
 
   // fetch data now playing film
-  void fetchNowPlayingFilm ()async {
-     await dataFilmProvider.getNowPlaying().then((result) {
+  void fetchNowPlayingFilm() async {
+    await dataFilmProvider.getNowPlaying().then((result) {
       listNowPlaying.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
-      listGenre.forEach((data) {
-        listNowPlaying.forEach((value) {
-          for (var i = 0; i < value.genreIds!.length; i++) {
-            if (data.id == value.genreIds![i]) {
-              value.genreIds!.add(data.name);
-            }
-          }
-        });
-      });
-
-      listNowPlaying.forEach((element) {
-        element.genreIds!.removeWhere((val) => val.runtimeType == int);
-      });
-
+      replaceGenreIdsWithGenreNames(listNowPlaying);
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
@@ -57,20 +44,7 @@ class HomeController extends GetxController with StateMixin {
   void fetchPopularFilm() async {
     await dataFilmProvider.getPopular().then((result) {
       listPopular.value = FilmModel.fromJson(result.body).results!;
-      // fetch genre data
-      listGenre.forEach((data) {
-        listPopular.forEach((value) {
-          for (var i = 0; i < value.genreIds!.length; i++) {
-            if (data.id == value.genreIds![i]) {
-              value.genreIds!.add(data.name);
-            }
-          }
-        });
-      });
-
-      listPopular.forEach((element) {
-        element.genreIds!.removeWhere((val) => val.runtimeType == int);
-      });
+      replaceGenreIdsWithGenreNames(listPopular);
 
       change(null, status: RxStatus.success());
     }, onError: (err) {
@@ -82,21 +56,7 @@ class HomeController extends GetxController with StateMixin {
   void fetchTopRatedFilm() async {
     await dataFilmProvider.getTopRated().then((result) {
       listTopRated.value = FilmModel.fromJson(result.body).results!;
-      // fetch genre data
-      listGenre.forEach((data) {
-        listTopRated.forEach((value) {
-          for (var i = 0; i < value.genreIds!.length; i++) {
-            if (data.id == value.genreIds![i]) {
-              value.genreIds!.add(data.name);
-            }
-          }
-        });
-      });
-
-      listTopRated.forEach((element) {
-        element.genreIds!.removeWhere((val) => val.runtimeType == int);
-      });
-
+      replaceGenreIdsWithGenreNames(listTopRated);
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
@@ -107,21 +67,7 @@ class HomeController extends GetxController with StateMixin {
   void fetchUpcomingFilm() async {
     await dataFilmProvider.getUpcoming().then((result) {
       listUpcoming.value = FilmModel.fromJson(result.body).results!;
-      // fetch genre data
-      listGenre.forEach((data) {
-        listUpcoming.forEach((value) {
-          for (var i = 0; i < value.genreIds!.length; i++) {
-            if (data.id == value.genreIds![i]) {
-              value.genreIds!.add(data.name);
-            }
-          }
-        });
-      });
-
-      listUpcoming.forEach((element) {
-        element.genreIds!.removeWhere((val) => val.runtimeType == int);
-      });
-
+      replaceGenreIdsWithGenreNames(listUpcoming);
       change(null, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
@@ -137,5 +83,17 @@ class HomeController extends GetxController with StateMixin {
       change(null, status: RxStatus.error(err.toString()));
     });
   }
-  
+
+  void replaceGenreIdsWithGenreNames(List<Results> results) async {
+    listGenre.forEach((data) {
+      results.forEach((value) {
+        for (var i = 0; i < value.genreIds!.length; i++) {
+          if (data.id == value.genreIds![i]) {
+            // value.genreIds!.add(data.name);
+            value.genreIds![i] = data.name;
+          }
+        }
+      });
+    });
+  }
 }

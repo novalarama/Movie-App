@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/app/routes/app_pages.dart';
-import 'package:movie/app/models/FilmModel.dart';
+import 'package:movie/app/models/film_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:movie/app/data/constants/assetsDesign.dart';
 
@@ -21,7 +21,7 @@ class Swiper extends StatelessWidget {
           child: VStack([
         HStack(
           [
-            'Now Playing'.text.color(textColor).bold.size(18).make().pLTRB(20, 15, 180, 8),
+            'Now Playing'.text.color(textColor).bold.size(18).make(),
             InkWell(
               onTap: () {
                 Get.toNamed(Routes.CATEGORY, arguments: [
@@ -29,9 +29,10 @@ class Swiper extends StatelessWidget {
                   listFilm,
                 ]);
               },
-              child: 'See All'.text.color(buttonTextColor).size(14).end.make().pLTRB(0, 20, 0, 8),
+              child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
             ),
           ],
+          alignment: MainAxisAlignment.spaceBetween
         ),
         VxSwiper.builder(
             itemCount: listFilm.isNotEmpty ? listFilm.length-10 : 0,
@@ -59,7 +60,7 @@ class Swiper extends StatelessWidget {
                       ),
                     ),
                     "${listFilm[index].title}".text.color(textColor).size(18).bold.ellipsis.make().pOnly(top: 10),
-                    listFilm[index].genreIds!.join(" ").text.color(textColor).size(10).ellipsis.make(),
+                    listFilm[index].genreIds!.join(" • ").text.color(textColor).size(10).ellipsis.make(),
                     HStack([
                       Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
                       "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),

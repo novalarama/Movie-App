@@ -16,10 +16,8 @@ class HomeView extends GetView<HomeController> {
         title: 'Movie App'.text.bold.start.make(),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: VStack([
-          // now playing
-          Center(
+      body: Center(
+        child: SingleChildScrollView(
             child: controller.obx(
                 (data) => VStack([
                       Swiper(title: 'Now Playing', listFilm: controller.listNowPlaying),
@@ -30,13 +28,12 @@ class HomeView extends GetView<HomeController> {
                 onLoading: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
-                    child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).makeCentered()]),
+                    child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],alignment: MainAxisAlignment.center, crossAlignment: CrossAxisAlignment.center,),
                   ),
                 ),
                 onError: (error) => "Error : $error".text.color(textColor).makeCentered()
               ),
           ),
-        ]).scrollVertical(),
       ),
     );
   }
