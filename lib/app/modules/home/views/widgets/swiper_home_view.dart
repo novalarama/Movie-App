@@ -17,60 +17,64 @@ class Swiper extends StatelessWidget {
     if (listFilm == null) {
       return CircularProgressIndicator();
     } else {
-      return VxBox(
-          child: VStack([
-        HStack(
-          [
-            'Now Playing'.text.color(textColor).bold.size(18).make(),
-            InkWell(
-              onTap: () {
-                Get.toNamed(Routes.CATEGORY, arguments: [
-                  {'title': title},
-                  listFilm,
-                ]);
-              },
-              child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
-            ),
-          ],
-          alignment: MainAxisAlignment.spaceBetween
-        ),
-        VxSwiper.builder(
-            itemCount: listFilm.isNotEmpty ? listFilm.length-10 : 0,
-            itemBuilder: (context, index) {
-              return InkWell(
+      return Padding(
+        padding: const EdgeInsets.all(18),
+        child: VStack([
+          HStack(
+            [
+              '$title'.text.color(textColor).bold.size(18).make(),
+              InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.DETAIL, arguments: listFilm[index]);
+                  Get.toNamed(Routes.CATEGORY, arguments: [
+                    {'title': title},
+                    listFilm,
+                  ]);
                 },
-                child: VxContinuousRectangle(
-                  radius: 16,
-                  backgroundImage: DecorationImage(
-                    image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].backdropPath}'),
-                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
-                    fit: BoxFit.cover,
-                  ),
-                  backgroundColor: Colors.black,
-                  child: VStack([
-                    VxContinuousRectangle(
-                      // width: 300,
-                      radius: 24,
-                      backgroundImage: DecorationImage(
-                        image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
-                        fit: BoxFit.cover,
-                        // alignment: Alignment.center
-                      ),
+                child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
+              ),
+            ],
+            alignment: MainAxisAlignment.spaceBetween,
+            crossAlignment: CrossAxisAlignment.center,
+            axisSize: MainAxisSize.max,
+          ),
+          VxSwiper.builder(
+              itemCount: listFilm.isNotEmpty ? listFilm.length - 10 : 0,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.DETAIL, arguments: listFilm[index].id);
+                  },
+                  child: VxContinuousRectangle(
+                    radius: 16,
+                    backgroundImage: DecorationImage(
+                      image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].backdropPath}'),
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                      fit: BoxFit.cover,
                     ),
-                    "${listFilm[index].title}".text.color(textColor).size(18).bold.ellipsis.make().pOnly(top: 10),
-                    listFilm[index].genreIds!.join(" • ").text.color(textColor).size(10).ellipsis.make(),
-                    HStack([
-                      Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
-                      "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
-                      " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
-                    ])
-                  ]).pLTRB(32, 16, 32, 8),
-                ).p8(),
-              );
+                    backgroundColor: Colors.black,
+                    child: VStack([
+                      VxContinuousRectangle(
+                        // width: 300,
+                        radius: 24,
+                        backgroundImage: DecorationImage(
+                          image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
+                          fit: BoxFit.cover,
+                          // alignment: Alignment.center
+                        ),
+                      ),
+                      "${listFilm[index].title}".text.color(textColor).size(18).bold.ellipsis.make().pOnly(top: 10),
+                      listFilm[index].genreIds!.join(" • ").text.color(textColor).size(10).ellipsis.make(),
+                      HStack([
+                        Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
+                        "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
+                        " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
+                      ])
+                    ]).p8(),
+                  ).p8(),
+                );
             })
-      ])).make().centered();
+        ]),
+      );
     }
   }
 }

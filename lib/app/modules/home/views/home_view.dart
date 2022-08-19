@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: mainColor,
       appBar: AppBar(
-        // backgroundColor: secondColor,
+        backgroundColor: secondColor,
         title: 'Movie App'.text.bold.start.make(),
         centerTitle: true,
       ),
@@ -26,9 +26,9 @@ class HomeView extends GetView<HomeController> {
                       Part(title: 'Upcoming', listFilm: controller.listUpcoming),
                     ]),
                 onLoading: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(32),
                   child: Center(
-                    child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],alignment: MainAxisAlignment.center, crossAlignment: CrossAxisAlignment.center,),
+                    child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],alignment: MainAxisAlignment.spaceEvenly, crossAlignment: CrossAxisAlignment.center,),
                   ),
                 ),
                 onError: (error) => "Error : $error".text.color(textColor).makeCentered()

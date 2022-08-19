@@ -17,69 +17,74 @@ class Part extends StatelessWidget {
     if (listFilm == null) {
       return CircularProgressIndicator();
     } else {
-      return VxBox(
-          child: VStack([
-        HStack(
-          [
-            '$title'.text.color(textColor).bold.size(18).make().pLTRB(20, 15, 220, 8),
-            InkWell(
-              onTap: () {
-                Get.toNamed(Routes.CATEGORY, arguments: [
-                  {'title': title},
-                  listFilm,
-                ]);
-              },
-              child: 'See All'.text.color(buttonTextColor).size(14).end.make().pLTRB(0, 20, 0, 8),
-            ),
-          ],
-        ),
-        VxBox(
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: listFilm.isNotEmpty ? listFilm.length - (listFilm.length ~/ 2) : 0,
-            itemBuilder: (context, index) {
-              List listGenre = listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
-              return InkWell(
+      return Padding(
+        padding: const EdgeInsets.all(18),
+        child: VStack([
+          HStack(
+            [
+              '$title'.text.color(textColor).bold.size(18).make(),
+              InkWell(
                 onTap: () {
-                  Get.toNamed(
-                    Routes.DETAIL,
-                    arguments: listFilm[index].id,
-                  );
+                  Get.toNamed(Routes.CATEGORY, arguments: [
+                    {'title': title},
+                    listFilm,
+                  ]);
                 },
-                child: VxContinuousRectangle(
-                  width: 160,
-                  radius: 16,
-                  backgroundColor: secondColor,
-                  child: VStack([
-                    // VxBox(
-                    Container(
-                      height: 230,
-                      decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.all(Radius.circular(12)),
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-                          image: DecorationImage(
-                            image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
-                            fit: BoxFit.cover,
-                          )),
-                    ).paddingOnly(bottom: 4),
-                    // ).make(),
-                    VStack([
-                      '${listFilm[index].title}'.text.bold.color(textColor).size(16).ellipsis.make(),
-                      '${DateFormat.y().format(DateTime.parse(listFilm[index].releaseDate.toString()))} ${listGenre.first}'.text.color(textColor).size(12).make(),
-                      HStack([
-                        Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
-                        "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
-                        " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
-                      ])
-                    ]).paddingOnly(left: 8, top: 4),
-                  ]),
-                ).p4(),
-              );
-            },
-          ).scrollHorizontal(),
-        ).height(320).make(),
-      ])).make().centered();
+                child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
+              ),
+            ],
+            alignment: MainAxisAlignment.spaceBetween,
+            crossAlignment: CrossAxisAlignment.center,
+            axisSize: MainAxisSize.max,
+          ),
+          VxBox(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: listFilm.isNotEmpty ? listFilm.length - (listFilm.length ~/ 2) : 0,
+              itemBuilder: (context, index) {
+                List listGenre = listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
+                return InkWell(
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.DETAIL,
+                      arguments: listFilm[index].id,
+                    );
+                  },
+                  child: VxContinuousRectangle(
+                    width: 160,
+                    radius: 16,
+                    backgroundColor: secondColor,
+                    child: VStack([
+                      // VxBox(
+                      Container(
+                        height: 230,
+                        decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.all(Radius.circular(12)),
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                            image: DecorationImage(
+                              image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
+                              fit: BoxFit.cover,
+                            )),
+                      ).paddingOnly(bottom: 4),
+                      // ).make(),
+                      VStack([
+                        '${listFilm[index].title}'.text.bold.color(textColor).size(16).ellipsis.make(),
+                        '${DateFormat.y().format(DateTime.parse(listFilm[index].releaseDate.toString()))} ${listFilm[index].genreIds!.first}'.text.color(textColor).size(12).make(),
+                        HStack([
+                          Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
+                          "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
+                          " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
+                        ])
+                      ]).paddingOnly(left: 8, top: 4),
+                    ]),
+                  ).p4(),
+                );
+              },
+            ).scrollHorizontal(),
+          ).padding(Vx.mLTRB(0, 12, 0, 0)).height(320).make(),
+        ]),
+      );
     }
   }
 }
