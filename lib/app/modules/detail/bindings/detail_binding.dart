@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:movie/app/repository/providers/data_film_provider.dart';
+import 'package:movie/app/modules/detail/repositories/detail_repository.dart';
 import '../controllers/detail_controller.dart';
 
 class DetailBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => DataFilmProvider());
-    Get.lazyPut(() => DetailController(data: Get.find()));
+    Get.lazyPut(() => DetailRepository());
+    Get.lazyPut(() => DetailController(detailRepository: Get.find()));
   }
 }
