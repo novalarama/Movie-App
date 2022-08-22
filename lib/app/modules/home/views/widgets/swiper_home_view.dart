@@ -38,7 +38,7 @@ class Swiper extends StatelessWidget {
             axisSize: MainAxisSize.max,
           ),
           VxSwiper.builder(
-              itemCount: listFilm.isNotEmpty ? listFilm.length - 10 : 0,
+              itemCount: listFilm.isNotEmpty ? listFilm.length : 0,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -47,7 +47,7 @@ class Swiper extends StatelessWidget {
                   child: VxContinuousRectangle(
                     radius: 16,
                     backgroundImage: DecorationImage(
-                      image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].backdropPath}'),
+                      image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].backdropPath!}'),
                       colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
                       fit: BoxFit.cover,
                     ),

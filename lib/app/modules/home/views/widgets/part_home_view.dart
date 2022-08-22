@@ -41,9 +41,8 @@ class Part extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: listFilm.isNotEmpty ? listFilm.length - (listFilm.length ~/ 2) : 0,
+              itemCount: listFilm.isNotEmpty ? listFilm.length : 0,
               itemBuilder: (context, index) {
-                List listGenre = listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
                 return InkWell(
                   onTap: () {
                     Get.toNamed(

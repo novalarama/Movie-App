@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:movie/app/models/film_model.dart';
-import 'package:movie/app/repository/providers/data_film_provider.dart';
+import 'package:movie/app/modules/home/repositories/home_repository.dart';
 import 'package:movie/app/models/genre_model.dart';
 
 class HomeController extends GetxController with StateMixin {
-  final DataFilmProvider dataFilmProvider;
-  HomeController({required this.dataFilmProvider});
+  final HomeRepository homeRepository;
+  HomeController({required this.homeRepository});
 
   // prepare for film data based on category
   final listNowPlaying = <Results>[].obs;
@@ -30,7 +30,7 @@ class HomeController extends GetxController with StateMixin {
 
   // fetch data now playing film
   void fetchNowPlayingFilm() async {
-    await dataFilmProvider.getNowPlaying().then((result) {
+    await homeRepository.getNowPlaying().then((result) {
       listNowPlaying.value = FilmModel.fromJson(result.body).results!;
       // fetch genre data
       replaceGenreIdsWithGenreNames(listNowPlaying);
@@ -42,7 +42,7 @@ class HomeController extends GetxController with StateMixin {
 
   // fetch data popular film
   void fetchPopularFilm() async {
-    await dataFilmProvider.getPopular().then((result) {
+    await homeRepository.getPopular().then((result) {
       listPopular.value = FilmModel.fromJson(result.body).results!;
       replaceGenreIdsWithGenreNames(listPopular);
 
@@ -54,7 +54,7 @@ class HomeController extends GetxController with StateMixin {
 
   // fetch data top rated film
   void fetchTopRatedFilm() async {
-    await dataFilmProvider.getTopRated().then((result) {
+    await homeRepository.getTopRated().then((result) {
       listTopRated.value = FilmModel.fromJson(result.body).results!;
       replaceGenreIdsWithGenreNames(listTopRated);
       change(null, status: RxStatus.success());
@@ -65,7 +65,7 @@ class HomeController extends GetxController with StateMixin {
 
   // fetch data upcoming film
   void fetchUpcomingFilm() async {
-    await dataFilmProvider.getUpcoming().then((result) {
+    await homeRepository.getUpcoming().then((result) {
       listUpcoming.value = FilmModel.fromJson(result.body).results!;
       replaceGenreIdsWithGenreNames(listUpcoming);
       change(null, status: RxStatus.success());
@@ -76,7 +76,7 @@ class HomeController extends GetxController with StateMixin {
 
   // function for fetch genreIds data with genre film
   void getDataGenre() async {
-    await dataFilmProvider.getGenre().then((result) {
+    await homeRepository.getGenre().then((result) {
       listGenre.value = Genre.fromJson(result.body).genres!;
       change(null, status: RxStatus.success());
     }, onError: (err) {
