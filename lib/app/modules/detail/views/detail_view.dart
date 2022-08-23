@@ -32,6 +32,7 @@ class DetailView extends GetView<DetailController> {
                     flex: 5,
                     child: VStack([
                     '${controller.detailFilm.value.title}'.text.color(textColor).bold.size(32).overflow(TextOverflow.visible).lineHeight(1.2).make(),
+
                     HStack([
                               VxRating(
                                 onRatingUpdate: (val) {},
@@ -44,11 +45,11 @@ class DetailView extends GetView<DetailController> {
                               " ${controller.detailFilm.value.voteAverage}".text.color(textColor).size(14).make(),
                               " (${controller.detailFilm.value.voteCount})".text.color(textColor).size(14).make(),
                     ]),
-                    controller.detailFilm.value.genres!.map((e) => e.name).toList().join(", ").text.color(textColor).size(14).ellipsis.overflow(TextOverflow.ellipsis).make(),
-                    '${controller.detailFilm.value.releaseDate}'.text.color(textColor).size(14).make(),
+                    controller.detailFilm.value.genres!.map((e) => e.name).toList().join(" | ").text.color(textColor).size(14).ellipsis.overflow(TextOverflow.ellipsis).make(),
+                    '${controller.detailFilm.value.releaseDate}'.text.color(buttonTextColor).size(11).make(),
                     HStack([
                       Icon(Icons.timelapse, color: buttonTextColor, size: 14,),
-                      ' ${controller.detailFilm.value.runtime} minutes'.text.color(textColor).size(14).make(),
+                      ' ${controller.detailFilm.value.runtime} minutes'.text.color(textColor).size(11).make(),
                     ])
                   ]),
                   ),
@@ -62,7 +63,7 @@ class DetailView extends GetView<DetailController> {
               onLoading: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: VStack([CircularProgressIndicator(), 'detailFilm mu akan siap...'.text.color(textColor).size(12).makeCentered()], alignment: MainAxisAlignment.center, crossAlignment: CrossAxisAlignment.center,),
+                      child: VStack([CircularProgressIndicator(), 'detail film mu akan siap...'.text.color(textColor).size(12).makeCentered()], alignment: MainAxisAlignment.center, crossAlignment: CrossAxisAlignment.center,),
                     )
               ),
               onError: (error) => "Error : $error".text.color(textColor).makeCentered()

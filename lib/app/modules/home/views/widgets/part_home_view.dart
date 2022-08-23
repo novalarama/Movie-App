@@ -8,13 +8,14 @@ import 'package:intl/intl.dart';
 
 class Part extends StatelessWidget {
   final String title;
+  final String path;
   final RxList<Results> listFilm;
 
-  Part({required this.title, required this.listFilm});
+  Part({required this.title, required this.path, required this.listFilm});
 
   @override
   Widget build(BuildContext context) {
-    if (listFilm == null) {
+    if (listFilm.length == null) {
       return CircularProgressIndicator();
     } else {
       return Padding(
@@ -26,8 +27,8 @@ class Part extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Get.toNamed(Routes.CATEGORY, arguments: [
-                    {'title': title},
-                    listFilm,
+                    title,
+                    path
                   ]);
                 },
                 child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
@@ -55,11 +56,9 @@ class Part extends StatelessWidget {
                     radius: 16,
                     backgroundColor: secondColor,
                     child: VStack([
-                      // VxBox(
                       Container(
                         height: 230,
                         decoration: BoxDecoration(
-                            // borderRadius: BorderRadius.all(Radius.circular(12)),
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
                             image: DecorationImage(
                               image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),

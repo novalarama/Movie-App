@@ -20,10 +20,10 @@ class HomeView extends GetView<HomeController> {
         child: SingleChildScrollView(
             child: controller.obx(
                 (data) => VStack([
-                      Swiper(title: 'Now Playing', listFilm: controller.listNowPlaying),
-                      Part(title: 'Popular', listFilm: controller.listPopular),
-                      Part(title: 'Top Rated', listFilm: controller.listTopRated),
-                      Part(title: 'Upcoming', listFilm: controller.listUpcoming),
+                      Swiper(title: 'Now Playing', path: 'now_playing', listFilm: controller.listNowPlaying),
+                      Part(title: 'Popular', path: 'popular', listFilm: controller.listPopular),
+                      Part(title: 'Top Rated', path: 'top_rated', listFilm: controller.listTopRated),
+                      Part(title: 'Upcoming', path: 'upcoming', listFilm: controller.listUpcoming),
                     ]),
                 onLoading: Padding(
                   padding: const EdgeInsets.all(32),
