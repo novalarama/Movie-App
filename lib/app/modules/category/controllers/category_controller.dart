@@ -41,6 +41,7 @@ class CategoryController extends GetxController with StateMixin {
   void dispose() {
     super.dispose();
     scrollController.dispose();
+    listFilm.remove(value);
   }
 
   // function for fetch genreIds data with genre film
