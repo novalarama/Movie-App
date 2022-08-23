@@ -2,33 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/category_controller.dart';
 import 'package:movie/app/routes/app_pages.dart';
-import 'package:movie/app/models/film_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:movie/app/data/constants/assetsDesign.dart';
 
-class CategoryView extends GetView<CategoryController> {
-  final Map<String, String> title = Get.arguments[0];
-  final RxList<Results> listFilm = Get.arguments[1];
+class CategoryView extends GetView<CategoryController> {  
   @override
   Widget build(BuildContext context) {
-    if (Get.arguments != null || Get.arguments < 0) {
       return Scaffold(
-          backgroundColor: mainColor,
+          backgroundColor: secondColor,
           appBar: AppBar(
             backgroundColor: secondColor,
-            title: '${title['title']}'.text.bold.start.make(),
+            title: '${controller.title}'.text.bold.start.make(),
             centerTitle: true,
           ),
           body: Center(
-            child: VxScrollVertical(
-              child: VStack([
-                ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: listFilm.isNotEmpty ? listFilm.length : 0,
-                  itemBuilder: (context, index) {
-                    var film = listFilm;
-                      return InkWell(
+              child: controller.obx(
+                  (data) => 
+                  ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    controller: controller.scrollController,
+                    itemCount: controller.listFilm.length + 1,
+                    itemBuilder: (context, index) {
+                      var film = controller.listFilm.value;
+                      if (index < controller.listFilm.length && controller.nextPage == true) {
+                        return InkWell(
                         onTap: () {
                           Get.toNamed(Routes.DETAIL, arguments: film[index].id);
                         },
@@ -57,8 +55,8 @@ class CategoryView extends GetView<CategoryController> {
                                 normalColor: Colors.grey.shade500,
                                 selectionColor: Colors.yellow,
                               ),
-                              " ${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),
-                              " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
+                              " ${film[index].voteAverage}".text.color(textColor).size(10).make(),
+                              " (${film[index].voteCount})".text.color(textColor).size(10).make(),
                             ])
                           ])),
                           Icon(
@@ -67,15 +65,16 @@ class CategoryView extends GetView<CategoryController> {
                           ).paddingOnly(right: 8)
                         ])).padding(Vx.mOnly(top: 20)).height(175).color(secondColor).make(),
                       );
-                  },
-                )
-              ]),
+                      } else {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 32),
+                          child: Center(child: CircularProgressIndicator(),),
+                        );
+                      }
+                    },
+                  )
             ),
           ));
-    } else {
-      return Center(
-        child: ElevatedButton.icon(onPressed: () => Get.toNamed(Routes.HOME), icon: Icon(Icons.arrow_back), label: 'Kembali'.text.make()),
-      );
-    }
+
   }
 }
