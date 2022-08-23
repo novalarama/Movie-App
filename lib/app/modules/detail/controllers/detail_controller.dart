@@ -9,12 +9,13 @@ class DetailController extends GetxController with StateMixin {
   DetailController({required this.detailRepository});
 
   final int idFilm = Get.arguments;
+  var page = 1.toString();
 
   final detailFilm = DetailFilm().obs;
 
   // get runtime data's
   void getDetailFilm() {
-    detailRepository.getDetailFilm(idFilm).then((result) {
+    detailRepository.getDetailFilm(idFilm, page).then((result) {
       detailFilm.value = DetailFilm.fromJson(result.body);
 
       change(null, status: RxStatus.success());

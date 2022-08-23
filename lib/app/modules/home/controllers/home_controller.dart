@@ -26,8 +26,6 @@ class HomeController extends GetxController with StateMixin {
     fetchUpcomingFilm();
   }
 
-  // listFilm[index].genreIds!.where((element) => element.runtimeType != int).toList();
-
   // fetch data now playing film
   void fetchNowPlayingFilm() async {
     await homeRepository.getNowPlaying().then((result) {
