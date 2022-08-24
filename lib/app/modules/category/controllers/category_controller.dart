@@ -19,8 +19,8 @@ class CategoryController extends GetxController with StateMixin {
   final listGenre = <AllGenres>[].obs;
 
   // variable for page
-  var currentPage = 1;
-  var nextPage = true;
+  var currentPage = 1.obs;
+  var nextPage = true.obs;
 
   // final refresh
   final scrollController = ScrollController();
@@ -38,10 +38,12 @@ class CategoryController extends GetxController with StateMixin {
     });
   }
 
+  @override
   void dispose() {
     super.dispose();
     scrollController.dispose();
-    listFilm.remove(value);
+    listFilm.value.clear();
+    currentPage.value = 1;
   }
 
   // function for fetch genreIds data with genre film
@@ -70,12 +72,12 @@ class CategoryController extends GetxController with StateMixin {
   // fetch data film from all pages
   void getAllFilm(String path, var currentPage) async {
     await categoryRepository.getFilm(path, currentPage).then((result) {
-      nextPage = true;
+      nextPage.value = true;
       listFilm.addAll(FilmModel.fromJson(result.body).results!);
       replaceGenreIdsWithGenreNames(listFilm);
       change(null, status: RxStatus.success());
     }, onError: (err) {
-      nextPage = false;
+      nextPage.value = false;
       change(null, status: RxStatus.error(err.toString()));
     });
   }
