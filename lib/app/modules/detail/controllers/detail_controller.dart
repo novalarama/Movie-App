@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:movie/app/models/film_model.dart';
 import 'package:movie/app/modules/detail/repositories/detail_repository.dart';
-import 'package:movie/app/repository/providers/data_film_provider.dart';
 import 'package:movie/app/models/detail_film.dart';
 
 class DetailController extends GetxController with StateMixin {
