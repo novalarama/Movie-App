@@ -9,6 +9,9 @@ import 'package:movie/app/modules/home/views/widgets/part_home_view.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
+    
     return Scaffold(
       backgroundColor: mainColor,
       appBar: AppBar(
