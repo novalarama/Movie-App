@@ -11,7 +11,11 @@ class Swiper extends StatelessWidget {
   final String path;
   final RxList<Results> listFilm;
 
-  Swiper({required this.title,  required this.path, required this.listFilm,});
+  Swiper({
+    required this.title,
+    required this.path,
+    required this.listFilm,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,7 @@ class Swiper extends StatelessWidget {
               '$title'.text.color(textColor).bold.size(18).make(),
               InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.CATEGORY, arguments: [
-                    title,
-                    path
-                  ]);
+                  Get.toNamed(Routes.CATEGORY, arguments: [title, path]);
                 },
                 child: 'See All'.text.color(buttonTextColor).size(14).end.make(),
               ),
@@ -46,7 +47,8 @@ class Swiper extends StatelessWidget {
                     onTap: () {
                       Get.toNamed(Routes.DETAIL, arguments: listFilm[index].id);
                     },
-                    child: VxContinuousRectangle(
+                    child: listFilm[index].backdropPath != null ?
+                    VxContinuousRectangle(
                       radius: 16,
                       backgroundImage: DecorationImage(
                         image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].backdropPath!}'),
@@ -55,15 +57,15 @@ class Swiper extends StatelessWidget {
                       ),
                       backgroundColor: Colors.black,
                       child: VStack([
-                        VxContinuousRectangle(
-                          // width: 300,
-                          radius: 24,
-                          backgroundImage: DecorationImage(
-                            image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
-                            fit: BoxFit.cover,
-                            // alignment: Alignment.center
-                          ),
-                        ),
+                        listFilm[index].posterPath != null
+                            ? VxContinuousRectangle(
+                                radius: 24,
+                                backgroundImage: DecorationImage(
+                                  image: NetworkImage('http://image.tmdb.org/t/p/w500${listFilm[index].posterPath}'),
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : CircularProgressIndicator(),
                         "${listFilm[index].title}".text.color(textColor).size(18).bold.ellipsis.make().pOnly(top: 10),
                         listFilm[index].genreIds!.join(" • ").text.color(textColor).size(10).ellipsis.make(),
                         HStack([
@@ -72,7 +74,9 @@ class Swiper extends StatelessWidget {
                           " (${listFilm[index].voteCount})".text.color(textColor).size(10).make(),
                         ])
                       ]).p8(),
-                    ).p8(),
+                    ).p8()
+                    :
+                    CircularProgressIndicator(),
                   );
                 } else {
                   return Padding(

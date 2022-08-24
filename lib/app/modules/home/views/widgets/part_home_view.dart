@@ -68,7 +68,7 @@ class Part extends StatelessWidget {
                       // ).make(),
                       VStack([
                         '${listFilm[index].title}'.text.bold.color(textColor).size(16).ellipsis.make(),
-                        '${DateFormat.y().format(DateTime.parse(listFilm[index].releaseDate.toString()))} ${listFilm[index].genreIds!.first}'.text.color(textColor).size(12).make(),
+                        '${DateFormat.y().format(DateTime.parse(listFilm[index].releaseDate.toString()))} | ${listFilm[index].genreIds!.first}'.text.color(textColor).size(12).make(),
                         HStack([
                           Icon(Icons.star, color: Colors.yellow.shade600, size: 10),
                           "${listFilm[index].voteAverage}".text.color(textColor).size(10).make(),

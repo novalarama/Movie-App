@@ -18,22 +18,33 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Center(
         child: SingleChildScrollView(
-            child: controller.obx(
-                (data) => VStack([
-                      Swiper(title: 'Now Playing', path: 'now_playing', listFilm: controller.listNowPlaying),
-                      Part(title: 'Popular', path: 'popular', listFilm: controller.listPopular),
-                      Part(title: 'Top Rated', path: 'top_rated', listFilm: controller.listTopRated),
-                      Part(title: 'Upcoming', path: 'upcoming', listFilm: controller.listUpcoming),
-                    ]),
-                onLoading: Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Center(
-                    child: VStack([CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],alignment: MainAxisAlignment.spaceEvenly, crossAlignment: CrossAxisAlignment.center,),
+          child: controller.obx((data) {
+            if (controller.listNowPlaying.isNotEmpty && controller.listPopular.isNotEmpty && controller.listTopRated.isNotEmpty && controller.listUpcoming.isNotEmpty) {
+              return VStack([
+                Swiper(title: 'Now Playing', path: 'now_playing', listFilm: controller.listNowPlaying),
+                Part(title: 'Popular', path: 'popular', listFilm: controller.listPopular),
+                Part(title: 'Top Rated', path: 'top_rated', listFilm: controller.listTopRated),
+                Part(title: 'Upcoming', path: 'upcoming', listFilm: controller.listUpcoming),
+              ]);
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(32),
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+          },
+              onLoading: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Center(
+                  child: VStack(
+                    [CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],
+                    alignment: MainAxisAlignment.spaceEvenly,
+                    crossAlignment: CrossAxisAlignment.center,
                   ),
                 ),
-                onError: (error) => "Error : $error".text.color(textColor).makeCentered()
               ),
-          ),
+              onError: (error) => "Error : $error".text.color(textColor).makeCentered()),
+        ),
       ),
     );
   }

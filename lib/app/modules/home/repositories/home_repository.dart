@@ -4,7 +4,7 @@ import 'package:movie/app/providers/get_api.dart';
 class HomeRepository extends GetConnect {
   @override
   final connect = GetApi();
-  final api_key = GetApi().api_key;
+  final api_key = '81728309a12b337c7334a06681733deb';
 
   Future<Response> getNowPlaying() => connect.getData("movie/now_playing", {"api_key": api_key, "page": 1.toString()});
   Future<Response> getPopular() => connect.getData("movie/popular", {"api_key": api_key, "page": 1.toString()});
