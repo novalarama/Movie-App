@@ -21,12 +21,14 @@ class DetailView extends GetView<DetailController> {
       body: Center(
         child: VxScrollVertical(
           child: controller.obx((data) => VStack([
-                VxBox(
-                  child: Image(
-                    image: NetworkImage('http://image.tmdb.org/t/p/w500${controller.detailFilm.value.posterPath}'),
-                    fit: BoxFit.cover,
-                  )
-                ).make(),
+                Center(
+                  child: VxBox(
+                    child: Image(
+                      image: NetworkImage('http://image.tmdb.org/t/p/w500${controller.detailFilm.value.posterPath}'),
+                      fit: BoxFit.cover,
+                    )
+                  ).make(),
+                ),
                 HStack([
                   Expanded(
                     flex: 5,
