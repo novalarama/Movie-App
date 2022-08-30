@@ -9,9 +9,6 @@ import 'package:movie/app/modules/home/views/widgets/part_home_view.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
-    
     return Scaffold(
       backgroundColor: mainColor,
       appBar: AppBar(
@@ -40,7 +37,10 @@ class HomeView extends GetView<HomeController> {
                 padding: const EdgeInsets.all(32),
                 child: Center(
                   child: VStack(
-                    [CircularProgressIndicator(), 'Film mu akan siap...'.text.color(textColor).size(12).make()],
+                    [
+                      CircularProgressIndicator(),
+                      'Film mu akan siap...'.text.color(textColor).size(12).make(),
+                    ],
                     alignment: MainAxisAlignment.spaceEvenly,
                     crossAlignment: CrossAxisAlignment.center,
                   ),
